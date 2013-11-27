@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "twitter"
+require "yaml"
+
+class TwitterStreamingClient
+  def initialize(secrets)
+    @twitter_client = Twitter::Streaming::Client.new do |config|
+      config.consumer_key = secrets["consumer_key"]
+      config.consumer_secret = secrets["consumer_secret"]
+      config.access_token = secrets["access_token"]
+      config.access_token_secret = secrets["access_token_secret"]
+    end
+  end
+
+  def start
+    @twitter_client.sample do |tweet|
+      puts tweet.text
+    end
+  end
+end
+
+path = File.expand_path("../config/twitter.yml", File.dirname(__FILE__))
+secrets = YAML.load_file(path)
+TwitterStreamingClient.new(secrets).start
