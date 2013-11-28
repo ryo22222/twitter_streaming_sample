@@ -9,6 +9,7 @@ gem "jquery-rails"
 gem "uglifier", ">= 1.3.0"
 
 gem "twitter"
+gem "websocket-rails"
 
 group :production do
   gem "pg"
