@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
+require "active_support/core_ext/hash"
 require "twitter"
 require "yaml"
 require "net/http"
@@ -18,14 +19,18 @@ class TwitterStreamingClient
   end
 
   def start
-    @twitter_client.user do |message|
-      next unless message.is_a?(Twitter::Tweet)
-      @client.post("/streaming", "text=#{URI.encode(message.text)}")
+    @twitter_client.user do |tweet|
+      next unless tweet.is_a?(Twitter::Tweet)
+      params = { tweet: {} }
+      params[:tweet][:text] = tweet.text
+      params[:tweet][:screen_name] = tweet.user.screen_name
+      params[:tweet][:icon_url] = tweet.user.profile_image_url
+      @client.post("/streaming", params.to_query)
     end
   end
 end
 
-if ARGV[0] == "start" || ARGV.length != 3
+if ARGV[0] == "start" && ARGV.length == 3
   path = File.expand_path("../config/twitter.yml", File.dirname(__FILE__))
   secrets = YAML.load_file(path)
   TwitterStreamingClient.new(ARGV[1], ARGV[2].to_i, secrets).start

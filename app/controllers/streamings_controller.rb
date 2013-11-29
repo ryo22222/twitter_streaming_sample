@@ -5,7 +5,7 @@ class StreamingsController < ApplicationController
   end
 
   def create
-    WebsocketRails[:streaming].trigger "create", params[:text]
+    WebsocketRails[:streaming].trigger "create", params[:tweet]
     head :ok
   end
 end

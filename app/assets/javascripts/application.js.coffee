@@ -1,5 +1,6 @@
 #= require jquery
 #= require jquery_ujs
+#= require underscore-min
 #= require websocket_rails/main
 #= require twitter_streaming_sample
 #= require_tree .

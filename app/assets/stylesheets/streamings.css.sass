@@ -1,7 +1,36 @@
 .streamings
   &.show
-    .alert
-      margin: 20px 0
+    .tweet
+      margin-bottom: 10px
       padding: 10px
-      border: 1px solid #EBCCD1
-      background-color: #F2DEDE
+      border: 1px solid rgba(0, 0, 0, 0.2)
+      border-radius: 6px
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2)
+
+      &:after
+        content: "."
+        display: block
+        height: 0
+        clear: both
+        visibility: hidden
+
+      .icon-column
+        float: left
+        width: 48px
+        margin-top: 10px
+        margin-right: 10px
+
+        img
+          width: 48px
+          height: 48px
+
+      .text-column
+        float: left
+        width: 640px
+
+        p
+          margin: 10px 0
+
+          &.screen-name
+            color: #999999
+
