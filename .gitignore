@@ -21,4 +21,5 @@ pickle-email-*.html
 .project
 !.keep
 
+.env
 config/twitter.yml

@@ -6,6 +6,8 @@ require "twitter"
 require "net/http"
 require "uri"
 
+$stdout.sync = true
+
 class TwitterStreamingClient
   def initialize(host, port)
     @client = Net::HTTP.new(host, port)

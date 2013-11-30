@@ -25,5 +25,6 @@ group :development, :test do
 end
 
 group :development do
+  gem "foreman"
   gem "quiet_assets"
 end
