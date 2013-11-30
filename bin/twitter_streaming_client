@@ -3,18 +3,17 @@
 require "bundler/setup"
 require "active_support/core_ext/hash"
 require "twitter"
-require "yaml"
 require "net/http"
 require "uri"
 
 class TwitterStreamingClient
-  def initialize(host, port, secrets)
+  def initialize(host, port)
     @client = Net::HTTP.new(host, port)
     @twitter_client = Twitter::Streaming::Client.new do |config|
-      config.consumer_key = secrets["consumer_key"]
-      config.consumer_secret = secrets["consumer_secret"]
-      config.access_token = secrets["access_token"]
-      config.access_token_secret = secrets["access_token_secret"]
+      config.consumer_key = ENV["CONSUMER_KEY"]
+      config.consumer_secret = ENV["CONSUMER_SECRET"]
+      config.access_token = ENV["ACCESS_TOKEN"]
+      config.access_token_secret = ENV["ACCESS_TOKEN_SECRET"]
     end
   end
 
@@ -31,9 +30,7 @@ class TwitterStreamingClient
 end
 
 if ARGV[0] == "start" && ARGV.length == 3
-  path = File.expand_path("../config/twitter.yml", File.dirname(__FILE__))
-  secrets = YAML.load_file(path)
-  TwitterStreamingClient.new(ARGV[1], ARGV[2].to_i, secrets).start
+  TwitterStreamingClient.new(ARGV[1], ARGV[2].to_i).start
 else
   abort "Usage: twitter_streaming_client start <host> <port>"
 end
