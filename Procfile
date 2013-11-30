@@ -1,1 +1,1 @@
-web: bundle exec rails s -p $PORT
+worker: bin/twitter_streaming_client start naoty-timeline.herokuapp.com 15761
