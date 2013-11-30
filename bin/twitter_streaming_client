@@ -20,8 +20,8 @@ class TwitterStreamingClient
   end
 
   def start
-    @twitter_client.user do |tweet|
-      next unless tweet.is_a?(Twitter::Tweet)
+    @twitter_client.sample do |tweet|
+      next if tweet.lang != "ja" && tweet.user.time_zone != "Tokyo"
       params = { tweet: {} }
       params[:tweet][:text] = tweet.text
       params[:tweet][:screen_name] = tweet.user.screen_name

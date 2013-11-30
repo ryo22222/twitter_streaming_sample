@@ -10,7 +10,7 @@ class Streamings
     dispatcher = new WebSocketRails("ws://#{location.host}/websocket")
     channel = dispatcher.subscribe("streaming")
     channel.bind "create", (tweet) ->
-      $streamingView.find("div:last").remove() if $streamingView.length > 10
+      $streamingView.children(":last").remove() if $streamingView.children().length > 8
       tweetView = template
         text: tweet.text
         screen_name: tweet.screen_name

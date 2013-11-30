@@ -1,15 +1,13 @@
 doctype html
 html
   head
-    title @naoty_k's timeline
+    title Twitter Streaming Sample
     = csrf_meta_tags
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
   body class=stylesheet_namespace data=javascript_namespace
     header.clearfix
-      h1
-        = link_to "@naoty_k", "https://twitter.com/naoty_k"
-        | 's timeline
+      h1 Twitter Streaming Sample
     .container
       = yield
     footer
