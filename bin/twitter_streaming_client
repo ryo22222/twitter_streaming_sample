@@ -6,6 +6,9 @@ require "twitter"
 require "net/http"
 require "uri"
 
+# Patch for twitter gem
+require File.expand_path("../lib/ext/twitter", File.dirname(__FILE__))
+
 $stdout.sync = true
 
 class TwitterStreamingClient
